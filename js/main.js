@@ -208,13 +208,18 @@ let popupAutoOpened = false;
 
 // Toggle popup
 function toggleWhatsAppPopup() {
+    console.log('toggleWhatsAppPopup called, whatsappPopup:', whatsappPopup);
     if (whatsappPopup) {
         whatsappPopup.classList.toggle('active');
+        console.log('Active class toggled, current classes:', whatsappPopup.className);
         
         // If popup is opened manually, don't auto-open later
         if (whatsappPopup.classList.contains('active')) {
             popupAutoOpened = true;
+            console.log('Popup opened manually, setting popupAutoOpened to true');
         }
+    } else {
+        console.log('ERROR: whatsappPopup element not found!');
     }
 }
 
