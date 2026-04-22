@@ -74,7 +74,8 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap"></noscript>
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -121,7 +122,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="assets/images/owner.jpeg" alt="Aarif Mansuri - New Star AC & Fridge Services, Vadodara" class="owner-image">
+                <img src="assets/images/owner.jpeg" alt="Aarif Mansuri - New Star AC & Fridge Services, Vadodara" class="owner-image" loading="lazy" width="300" height="300">
             </div>
         </div>
     </section>
@@ -216,16 +217,6 @@
                     <p class="review">"Review coming soon..."</p>
                     <p class="customer-name">Customer Name</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Google Maps Section -->
-    <section id="map" class="map-section" role="region" aria-label="Find Us in Vadodara">
-        <div class="container">
-            <h2 class="section-title">Find Us in Vadodara</h2>
-            <div class="map-container">
-                <iframe src="https://maps.google.com/maps?q=Vadodara,Gujarat,India&output=embed" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" aria-label="Google Maps showing Vadodara location"></iframe>
             </div>
         </div>
     </section>
