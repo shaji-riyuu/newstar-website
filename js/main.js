@@ -3,35 +3,43 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        if (navMenu) navMenu.classList.toggle('active');
+    });
+}
 
 // Keyboard navigation for hamburger menu
-hamburger.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    }
-});
+if (hamburger) {
+    hamburger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            hamburger.classList.toggle('active');
+            if (navMenu) navMenu.classList.toggle('active');
+        }
+    });
+}
 
 // Close mobile menu when clicking on a link
 navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-    });
+    if (link) {
+        link.addEventListener('click', () => {
+            if (hamburger) hamburger.classList.remove('active');
+            if (navMenu) navMenu.classList.remove('active');
+        });
+    }
 });
 
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
     }
 });
 
@@ -186,11 +194,105 @@ if ('IntersectionObserver' in window) {
     });
 
     document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
+        if (img) {
+            imageObserver.observe(img);
+        }
     });
 }
 
+// WhatsApp Popup Functionality
+const whatsappTrigger = document.getElementById('whatsapp-trigger');
+const whatsappPopup = document.getElementById('whatsapp-popup');
+const whatsappClose = document.getElementById('whatsapp-close');
+let popupAutoOpened = false;
+
+// Toggle popup
+function toggleWhatsAppPopup() {
+    if (whatsappPopup) {
+        whatsappPopup.classList.toggle('active');
+        
+        // If popup is opened manually, don't auto-open later
+        if (whatsappPopup.classList.contains('active')) {
+            popupAutoOpened = true;
+        }
+    }
+}
+
+// Close popup
+function closeWhatsAppPopup() {
+    if (whatsappPopup) {
+        whatsappPopup.classList.remove('active');
+    }
+}
+
+// WhatsApp trigger click handler
+if (whatsappTrigger) {
+    whatsappTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleWhatsAppPopup();
+    });
+}
+
+// Close button click handler
+if (whatsappClose) {
+    whatsappClose.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeWhatsAppPopup();
+    });
+}
+
+// Close popup when clicking outside
+document.addEventListener('click', (e) => {
+    if (whatsappPopup && whatsappTrigger && 
+        whatsappPopup.classList.contains('active') && 
+        !whatsappPopup.contains(e.target) && 
+        !whatsappTrigger.contains(e.target)) {
+        closeWhatsAppPopup();
+    }
+});
+
+// Auto-open popup after 5 seconds if not manually opened
+setTimeout(() => {
+    if (!popupAutoOpened && whatsappPopup) {
+        whatsappPopup.classList.add('active');
+        popupAutoOpened = true;
+        
+        // Auto-close after 10 seconds if no interaction
+        setTimeout(() => {
+            if (whatsappPopup && whatsappPopup.classList.contains('active')) {
+                closeWhatsAppPopup();
+            }
+        }, 10000);
+    }
+}, 5000);
+
+// Keyboard navigation for popup
+if (whatsappTrigger) {
+    whatsappTrigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleWhatsAppPopup();
+        }
+    });
+}
+
+if (whatsappClose) {
+    whatsappClose.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            closeWhatsAppPopup();
+        }
+    });
+}
+
+// Close popup with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && whatsappPopup && whatsappPopup.classList.contains('active')) {
+        closeWhatsAppPopup();
+    }
+});
+
 // Console welcome message
-console.log('%c🌟 New Star AC & Fridge Services', 'font-size: 20px; font-weight: bold; color: #1565C0;');
+console.log('%c\u2728 New Star AC & Fridge Services', 'font-size: 20px; font-weight: bold; color: #1565C0;');
 console.log('%cProfessional AC and Refrigerator Services in Vadodara', 'font-size: 14px; color: #666;');
-console.log('%c📞 Call: +91 98249 34351 | 💬 WhatsApp: +91 98249 34351', 'font-size: 12px; color: #666;');
+console.log('%c\ud83d\udcde Call: +91 98249 34351 | \ud83d\udcac WhatsApp: +91 98249 34351', 'font-size: 12px; color: #666;');
